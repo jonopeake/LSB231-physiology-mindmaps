@@ -1,0 +1,138 @@
+<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Chemical synaptic transmission explorer</title><style>:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#183047;background:#f5f8fb}*{box-sizing:border-box}body{margin:0}.wrap{max-width:1050px;margin:auto;padding:20px}h1{font-size:1.55rem;margin:0 0 6px}p{line-height:1.5}.sub{color:#587084;margin:0 0 15px}.panel{background:white;border:1px solid #d8e3ed;border-radius:13px;padding:16px;margin:12px 0}.controls{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}button{background:#e8f1f7;border:1px solid #b9d1e0;color:#173d56;border-radius:8px;padding:9px 12px;cursor:pointer;font-weight:600}button:hover{background:#d5e8f5}button.active,.primary{background:#17658b;color:white;border-color:#17658b}button:focus-visible{outline:3px solid #ffb347;outline-offset:2px}.stage{font-weight:700;color:#13577a}.detail{min-height:3em}.diagram{width:100%;height:auto;display:block;background:#fbfdff;border-radius:10px}.small{font-size:.88rem;color:#546b7a}.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.83rem;margin:8px 0}.dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:5px}.grid{display:grid;grid-template-columns:1.6fr 1fr;gap:14px}.quiz label{display:block;padding:7px 0}.question{border-top:1px solid #e1e9ee;padding:12px 0}.feedback{font-weight:600;margin:7px 0}.correct{color:#187047}.incorrect{color:#9d451e}#synapse .activeGlow{opacity:0;transition:opacity .25s}#synapse .signal{opacity:0;transition:opacity .25s}#synapse .vesicle{transition:none}#synapse .nt{transition:none}#synapse .ca{transition:none}#synapse .na{transition:none}#synapse .gate{transition:fill .45s ease}#synapse .open{fill:#e9ae48}#synapse .closed{fill:#547a96}#synapse .pulse{animation:pulse 1s infinite alternate}@keyframes pulse{from{opacity:.4}to{opacity:1}}@media(max-width:700px){.grid{grid-template-columns:1fr}.wrap{padding:10px}.panel{padding:10px}h1{font-size:1.3rem}}.overview{margin:10px 0 13px}.overview svg{width:100%;height:auto;display:block;background:#f8fbfe;border:1px solid #e1eaf2;border-radius:10px}.overview .label{font-size:13px;fill:#34566d;font-weight:600}.overview .muted{font-size:11px;fill:#5e7586}.overview #wholePulse{transition:transform .55s ease,opacity .2s}.overview #terminalHalo,.overview #postHalo{transition:opacity .25s}.overview .structure{stroke-linecap:round;stroke-linejoin:round}@media(max-width:700px){.overview .label{font-size:14px}} .activity-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.activity-tabs button{flex:1;min-width:190px}.activity-note{font-size:.93rem;color:#49677a;margin:8px 0 12px}.overview{margin:0}.overview svg{max-height:300px}.whole-controls{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.whole-caption{font-size:.94rem;line-height:1.5;min-height:2.7em;margin:8px 0;color:#234b63}.hidden-activity{display:none!important}#wholePulse{transition:none!important} </style></head><body><main class="wrap"><h1>Chemical synaptic transmission explorer</h1><p class="sub">Explore the anatomical pathway and the detailed mechanism of chemical synaptic transmission in two separate activities.</p><section class="panel"><div class="activity-tabs" role="group" aria-label="Choose an activity"><button id="tabWhole" class="active" aria-pressed="true">1. Neuron-to-neuron signalling</button><button id="tabSynapse" aria-pressed="false">2. Inside the chemical synapse</button></div><div id="wholeActivity"><p class="activity-note">Watch an action potential propagate along the presynaptic axon, followed by chemical transmission across the synapse and a graded postsynaptic response.</p><div class="whole-controls"><button class="primary" id="wholePlay">▶ Play neuron animation</button><button id="wholePause">Pause</button><button id="wholeReset">↺ Reset</button></div><div class="overview"><svg viewBox="0 0 980 255" role="img" aria-label="Whole presynaptic neuron connecting to a second neuron; signal travels from axon hillock along the axon to the synapse and postsynaptic cell"><defs><linearGradient id="axonShade" x1="0" x2="1"><stop stop-color="#a8d5ee"/><stop offset="1" stop-color="#76b1d5"/></linearGradient></defs><text x="17" y="23" font-size="17" font-weight="700" fill="#244e68">Where transmission occurs: neuron to neuron</text><g class="structure" fill="none" stroke="#6ca5c7" stroke-width="12"><path d="M155 123 Q113 93 80 63 M146 132 Q98 148 51 169 M155 110 Q145 60 112 41 M164 140 Q151 183 123 209"/><path d="M229 129 C270 129 320 129 410 129 S530 129 624 129" stroke="#548eb3" stroke-width="17"/><path d="M229 129 C270 129 320 129 410 129 S530 129 624 129" stroke="#a8d5ee" stroke-width="10"/><path d="M229 129 L246 120 L246 138 Z" fill="#a8d5ee" stroke="none"/></g><ellipse cx="183" cy="128" rx="50" ry="43" fill="#d5e9f7" stroke="#548eb3" stroke-width="4"/><ellipse cx="182" cy="129" rx="15" ry="17" fill="#9db4d4"/><g fill="none" stroke="#548eb3" stroke-width="8" stroke-linecap="round"><path d="M620 129 Q656 101 685 93 M620 129 Q663 134 687 149 M620 129 Q655 166 682 185"/></g><g fill="#c9e9dc" stroke="#4b9b7e" stroke-width="3"><ellipse cx="798" cy="136" rx="53" ry="43"/><path d="M758 113 Q726 88 707 85 M755 137 Q725 146 704 163 M786 97 Q777 68 759 51 M829 120 Q862 96 879 76 M843 144 Q875 158 895 186" fill="none" stroke-width="9" stroke-linecap="round"/></g><ellipse cx="796" cy="136" rx="15" ry="17" fill="#8fc3ac"/><path d="M690 98 L730 112 M689 150 L733 144" stroke="#b8a0d9" stroke-width="3" stroke-dasharray="3 5"/><rect id="wholePulse" x="0" y="0" width="34" height="20" rx="10" fill="#ed9b42" opacity="0" transform="translate(220 119)"/><text id="apLabel" x="270" y="164" font-size="14" font-weight="700" fill="#a65318" opacity="0">Action potential (depolarisation)</text><g id="wholeTransmitters" opacity="0" fill="#b78ad5"><circle cx="703" cy="112" r="5"/><circle cx="711" cy="122" r="5"/><circle cx="701" cy="133" r="5"/></g><text id="ntLabel" x="675" y="61" font-size="13" font-weight="700" fill="#8255a8" opacity="0">Neurotransmitter</text><circle id="terminalHalo" cx="685" cy="124" r="38" fill="#e8a24b" opacity="0"/><circle id="postHalo" cx="759" cy="134" r="35" fill="#7ccda8" opacity="0"/><text class="label" x="32" y="237">Dendrites</text><text class="label" x="143" y="76">Cell body</text><text class="label" x="240" y="105">Axon hillock / initial segment</text><text class="label" x="430" y="105">Axon</text><text class="label" x="595" y="209">Axon terminals</text><text class="label" x="757" y="237">Postsynaptic neuron</text><path d="M184 80 L184 91 M305 108 L305 123 M448 108 L448 121 M648 196 L668 159 M806 219 L806 185" stroke="#9aafbe" stroke-width="1.5"/><text class="muted" x="386" y="246">Schematic overview · detailed synapse in activity 2</text></svg></div><p class="whole-caption" id="wholeCaption" aria-live="polite"></p></div><div id="synapseActivity" class="hidden-activity"><p class="activity-note">Examine the events at an enlarged excitatory chemical synapse, one stage at a time.</p><div class="controls"><button id="play" class="primary">▶ Play full animation</button><button id="pause">Pause</button><button id="reset">↺ Reset</button></div><div class="controls" id="stages" aria-label="Choose a stage"></div><div class="grid"><div><svg id="synapse" class="diagram" viewBox="0 0 700 500" role="img" aria-label="Animated presynaptic terminal, synaptic cleft and postsynaptic membrane"><defs><linearGradient id="pre" x2="0" y2="1"><stop stop-color="#e3eff9"/><stop offset="1" stop-color="#d2e7f6"/></linearGradient></defs><rect x="18" y="18" width="664" height="464" rx="12" fill="#f8fbfd" stroke="#e0eaf1"/><text x="35" y="45" font-size="17" font-weight="700" fill="#31566e">Presynaptic axon terminal</text><path d="M110 63 H590 Q625 63 625 110 V227 Q625 251 600 251 H100 Q75 251 75 227 V110 Q75 63 110 63" fill="url(#pre)" stroke="#4d89af" stroke-width="5"/><text x="35" y="284" font-size="15" fill="#526b7c">Synaptic cleft</text><path d="M70 348 Q350 339 630 348 L630 457 H70Z" fill="#e6f3eb" stroke="#54a184" stroke-width="5"/><text x="35" y="474" font-size="16" font-weight="700" fill="#2e7358">Postsynaptic membrane / cell</text><g id="ap" opacity="0" transform="translate(-155 0)"><path d="M135 90 H235" stroke="#eb8743" stroke-width="9" stroke-linecap="round"/><path d="M220 78 L241 90 L220 102" fill="none" stroke="#eb8743" stroke-width="7"/><text x="138" y="121" fill="#9e5121" font-size="13" font-weight="700">Action potential</text></g><g id="calcium-channel"><rect id="caGate" x="535" y="232" width="40" height="39" rx="9" class="gate closed"/><text x="530" y="216" font-size="13" fill="#375c73">Ca²⁺ channel</text></g><g id="calcium"><circle class="ca" cx="545" cy="291" r="8" fill="#8b65c8"/><circle class="ca" cx="560" cy="310" r="8" fill="#8b65c8"/><circle class="ca" cx="582" cy="292" r="8" fill="#8b65c8"/><text x="598" y="302" font-size="12" fill="#6e4e9b">Ca²⁺</text></g><g id="vesicles"><g class="vesicle" data-i="0"><circle cx="225" cy="158" r="33" fill="#fff3c8" stroke="#b88936" stroke-width="3"/><circle cx="214" cy="153" r="5" fill="#d68c30"/><circle cx="235" cy="152" r="5" fill="#d68c30"/><circle cx="225" cy="170" r="5" fill="#d68c30"/></g><g class="vesicle" data-i="1"><circle cx="344" cy="194" r="33" fill="#fff3c8" stroke="#b88936" stroke-width="3"/><circle cx="334" cy="191" r="5" fill="#d68c30"/><circle cx="355" cy="191" r="5" fill="#d68c30"/><circle cx="344" cy="205" r="5" fill="#d68c30"/></g><g class="vesicle" data-i="2"><circle cx="442" cy="140" r="33" fill="#fff3c8" stroke="#b88936" stroke-width="3"/><circle cx="432" cy="136" r="5" fill="#d68c30"/><circle cx="453" cy="136" r="5" fill="#d68c30"/><circle cx="442" cy="151" r="5" fill="#d68c30"/></g></g><g id="release"><circle class="nt" cx="323" cy="257" r="6" fill="#d68c30"/><circle class="nt" cx="342" cy="264" r="6" fill="#d68c30"/><circle class="nt" cx="363" cy="257" r="6" fill="#d68c30"/><circle class="nt" cx="380" cy="269" r="6" fill="#d68c30"/><circle class="nt" cx="304" cy="275" r="6" fill="#d68c30"/><circle class="nt" cx="355" cy="280" r="6" fill="#d68c30"/></g><g id="receptors"><rect id="rec1" x="285" y="328" width="39" height="38" rx="9" class="gate closed"/><rect id="rec2" x="375" y="328" width="39" height="38" rx="9" class="gate closed"/><text x="265" y="394" font-size="13" fill="#2e7358">Ligand-gated ion channels</text></g><g id="sodium"><g class="na"><circle cx="301" cy="303" r="13" fill="#2b9dc2" stroke="#116787" stroke-width="1.5"/><text x="301" y="307" text-anchor="middle" font-size="12" font-weight="800" fill="white">Na⁺</text></g><g class="na"><circle cx="393" cy="305" r="13" fill="#2b9dc2" stroke="#116787" stroke-width="1.5"/><text x="393" y="309" text-anchor="middle" font-size="12" font-weight="800" fill="white">Na⁺</text></g><g class="na"><circle cx="318" cy="286" r="13" fill="#2b9dc2" stroke="#116787" stroke-width="1.5"/><text x="318" y="290" text-anchor="middle" font-size="12" font-weight="800" fill="white">Na⁺</text></g></g><g id="postGlow"><rect x="87" y="406" width="526" height="22" rx="10" fill="#f3c367" opacity=".85"/></g><g id="labels"><text x="110" y="225" font-size="13" fill="#4e6576">Neurotransmitter vesicles</text></g></svg><div class="legend"><span><i class="dot" style="background:#8b65c8"></i>Ca²⁺</span><span><i class="dot" style="background:#d68c30"></i>Neurotransmitter</span><span><i class="dot" style="background:#2b9dc2"></i>Na⁺</span><span><i class="dot" style="background:#e9ae48"></i>Open channel</span></div></div><div><div class="stage" id="stageTitle" aria-live="polite"></div><p class="detail" id="explanation"></p><svg viewBox="0 0 300 170" style="width:100%;max-height:200px" role="img" aria-label="Schematic graded postsynaptic depolarisation"><text x="10" y="16" font-size="13" font-weight="700" fill="#31566e">Postsynaptic membrane potential</text><path d="M35 26 V140 H285" stroke="#728b9b" stroke-width="1.5" fill="none"/><path d="M35 113 H285" stroke="#b3c3cc" stroke-dasharray="4 4"/><text x="2" y="117" font-size="11" fill="#617786">−70</text><text x="4" y="34" font-size="11" fill="#617786">mV</text><text x="244" y="156" font-size="11" fill="#617786">Time</text><path d="M35 113 H103 Q130 113 151 80 Q166 64 180 80 Q208 113 245 113 H285" fill="none" stroke="#d98c36" stroke-width="4"/><circle id="graphDot" cx="35" cy="113" r="6" fill="#17658b"/><text x="42" y="129" font-size="11" fill="#617786">Resting</text></svg><p class="small">Illustrative excitatory postsynaptic potential (EPSP), not an action potential. A single EPSP does not necessarily reach threshold.</p></div></div></div></section><section class="panel"><h2 style="margin:0 0 8px;font-size:1.15rem">Check your understanding</h2><div class="quiz" id="quiz"></div></section><p class="small">Teaching model: a fast excitatory ionotropic synapse. The animation is deliberately slowed and schematic; synapses differ in their neurotransmitters, receptors and postsynaptic effects.</p></main><script>
+(()=>{'use strict';const steps=[
+ ['Action potential arrives','An action potential reaches and depolarises the presynaptic axon terminal.'],
+ ['Calcium channels open and Ca²⁺ enters','Depolarisation opens voltage-gated Ca²⁺ channels. Ca²⁺ then enters the presynaptic terminal down its electrochemical gradient.'],
+ ['Vesicle fusion and exocytosis','Ca²⁺ triggers synaptic vesicle fusion with the presynaptic membrane, followed by exocytosis of neurotransmitter into the synaptic cleft.'],
+ ['Diffusion, binding and channel opening','Neurotransmitter diffuses across the cleft, binds to postsynaptic receptors and opens ligand-gated ion channels.'],
+ ['Postsynaptic response','Na⁺ ions enter the postsynaptic cell through the open ligand-gated channels. This Na⁺ influx contributes to depolarisation and produces a graded excitatory postsynaptic potential (EPSP). An action potential is not automatic.']
+];
+const shortNames=['AP arrives','Ca²⁺ entry','Fusion and release','Ligand-gated channels','EPSP'];
+let current=0,playing=false,timer=null,phaseFrame=null,phaseStart=0;
+const $=id=>document.getElementById(id);
+const stageBox=$('stages');
+steps.forEach((s,i)=>{const b=document.createElement('button');b.textContent=(i+1)+'. '+shortNames[i];b.addEventListener('click',()=>{stop();render(i);animatePhase(i)});stageBox.appendChild(b)});
+const nodes=sel=>Array.from(document.querySelectorAll(sel));
+function stop(){playing=false;clearTimeout(timer);timer=null;if(phaseFrame!==null)cancelAnimationFrame(phaseFrame);phaseFrame=null;$('play').textContent='▶ Play full animation'}
+const mix=(a,b,t)=>a+(b-a)*Math.max(0,Math.min(1,t));
+function render(i){
+ current=i;
+ $('stageTitle').textContent='Stage '+(i+1)+': '+steps[i][0];
+ $('explanation').textContent=steps[i][1];
+ nodes('#stages button').forEach((b,j)=>b.classList.toggle('active',j===i));
+ $('ap').style.opacity=i===0?'0':'.18';
+ $('ap').setAttribute('transform',i===0?'translate(-155 0)':'translate(0 0)');
+ $('caGate').setAttribute('class','gate '+(i>=1?'open':'closed'));
+ $('rec1').setAttribute('class','gate '+(i>=4?'open':'closed'));
+ $('rec2').setAttribute('class','gate '+(i>=4?'open':'closed'));
+ nodes('.ca').forEach((el,j)=>{el.style.transform=i>=2?'translate(-'+(j*8+20)+'px,-'+(j*18+80)+'px)':'none';el.style.opacity=i>=1?1:.35});
+ nodes('.vesicle').forEach(el=>{el.style.transform='none';el.style.opacity=1});
+ nodes('.nt').forEach(el=>{el.style.transform='none';el.style.opacity=0});
+ nodes('.na').forEach(el=>{el.style.transform='none';el.style.opacity=i>=4?1:.25});
+ $('postGlow').style.opacity=i>=4?'0':'0';
+ $('graphDot').setAttribute('cx',i>=4?'174':i>=3?'130':'35');
+ $('graphDot').setAttribute('cy',i>=4?'76':i>=3?'101':'113');
+ if(i>=3){const v=nodes('.vesicle')[1];v.style.transform='translate(0px,38px)';v.style.opacity='.25';}
+ if(i>=4){const targets=[[-18,63],[-42,56],[-52,67],[12,52],[-5,49],[-52,49]];nodes('.nt').forEach((el,j)=>{el.style.transform='translate('+targets[j][0]+'px,'+targets[j][1]+'px)';el.style.opacity=1})};
+}
+function drawPhase(i,t){
+ const p=Math.max(0,Math.min(1,t));
+ if(i===0){
+   // The incoming action-potential arrow sweeps in from the left and stops at the terminal.
+   const arrival=p;
+   const eased=1-Math.pow(1-arrival,3);
+   $('ap').style.opacity=String(Math.min(1,p/.12));
+   $('ap').setAttribute('transform','translate('+(-155*(1-eased))+' 0)');
+ }
+ if(i===1){
+   // Open channels immediately at the phase boundary and start calcium influx without an initial pause.
+   $('caGate').setAttribute('class','gate open');
+   const entry=p;
+   nodes('.ca').forEach((el,j)=>{el.style.opacity=1;el.style.transform='translate('+(-1*(j*8+20)*entry)+'px,'+(-1*(j*18+80)*entry)+'px)'});
+ }
+ if(i===2){
+   const approach=Math.min(1,p/.43),release=Math.max(0,Math.min(1,(p-.43)/.57));
+   const v=nodes('.vesicle')[1];v.style.transform='translate(0px,'+(38*approach)+'px)';
+   v.style.opacity=String(1-.75*release);
+   nodes('.nt').forEach((el,j)=>{el.style.opacity=String(release);el.style.transform='translate('+(j%2?8:-8)*release+'px,'+((15+(j%3)*5)*release)+'px)'});
+ }
+ if(i===3){
+   // Neurotransmitter moves continuously from its release position to the receptor.
+   // Channels open at first contact, not after a separate waiting interval.
+   const diffusion=Math.min(1,p/.88);
+   const targets=[[-18,63],[-42,56],[-52,67],[12,52],[-5,49],[-52,49]];
+   nodes('.nt').forEach((el,j)=>{
+     const startX=(j%2?8:-8),startY=15+(j%3)*5;
+     const [endX,endY]=targets[j];
+     el.style.opacity=1;
+     el.style.transform='translate('+mix(startX,endX,diffusion)+'px,'+mix(startY,endY,diffusion)+'px)';
+   });
+   const contacted=diffusion>=.76;
+   $('rec1').setAttribute('class','gate '+(contacted?'open':'closed'));
+   $('rec2').setAttribute('class','gate '+(contacted?'open':'closed'));
+ }
+ if(i===4){
+   // Each labelled Na⁺ ion visibly crosses the postsynaptic channel (y=328–366)
+   // before reaching the cytoplasm. Stagger their passage for clarity.
+   nodes('.na').forEach((el,j)=>{
+     const start=[0,.13,.28][j];
+     const progress=Math.max(0,Math.min(1,(p-start)/(1-start)));
+     const eased=progress<.15?progress/.15*.12:.12+.88*((progress-.15)/.85);
+     el.style.opacity=1;
+     el.style.transform='translate(0px,'+(92*eased)+'px)';
+   });
+   $('postGlow').style.opacity=String(Math.max(0,Math.min(1,(p-.5)/.5)));
+   $('graphDot').setAttribute('cx',String(mix(130,174,p)));
+   $('graphDot').setAttribute('cy',String(mix(101,76,p)));
+ }
+} 
+function animatePhase(i){
+ if(phaseFrame!==null)cancelAnimationFrame(phaseFrame);
+ if(i<0||i>4)return;
+ // Every stage advances as soon as its animation completes; no idle hold at the end.
+ phaseStart=performance.now();
+ function frame(now){const t=Math.min(1,(now-phaseStart)/(i===0?1595:3630));drawPhase(i,t);if(t<1)phaseFrame=requestAnimationFrame(frame);else phaseFrame=null}
+ phaseFrame=requestAnimationFrame(frame);
+}
+function advance(){if(!playing)return;if(current===steps.length-1){stop();return}const next=current+1;render(next);animatePhase(next);timer=setTimeout(advance,3630)}
+$('play').addEventListener('click',()=>{stop();render(0);animatePhase(0);playing=true;$('play').textContent='Playing…';timer=setTimeout(advance,1595)});
+$('pause').addEventListener('click',()=>stop());
+$('reset').addEventListener('click',()=>{stop();render(0)});
+render(0);
+
+// The two activities have independent playback; the inactive view never animates.
+let wholeTimer=null,wholeStart=0,wholeElapsed=0,wholeRunning=false;
+const wholeMessages=[
+ 'An action potential is initiated near the axon initial segment and propagates along the presynaptic axon.',
+ 'The wave of depolarisation advances along the axon as successive membrane regions generate action potentials.',
+ 'The action potential reaches the presynaptic axon terminals and stops here. It does not cross the synaptic cleft.',
+ 'Calcium-dependent vesicle fusion releases neurotransmitter, which diffuses across the synaptic cleft.',
+ 'Neurotransmitter activates postsynaptic receptors, producing a graded postsynaptic response (shown in green).'
+];
+function wholeDraw(t){
+ const u=Math.max(0,Math.min(1,t));
+ const ap=$('wholePulse'),label=$('apLabel'),nts=$('wholeTransmitters'),ntLabel=$('ntLabel');
+ // Axonal propagation is quicker; the other phases retain their previous durations.
+ const apEnd=.40, terminalEnd=.606, chemicalEnd=.825;
+ const apPhase=u<apEnd;
+ ap.style.opacity=apPhase?'1':'0';label.style.opacity=apPhase?'1':'0';
+ if(apPhase){const f=u/apEnd;const x=235+390*f;ap.setAttribute('transform','translate('+x+' 119)');}
+ const terminal=u>=apEnd&&u<terminalEnd;
+ $('terminalHalo').style.opacity=terminal?'.45':'0';
+ const chemical=u>=terminalEnd&&u<chemicalEnd;
+ nts.style.opacity=chemical?'1':'0';ntLabel.style.opacity=chemical?'1':'0';
+ if(chemical){const f=(u-terminalEnd)/(chemicalEnd-terminalEnd);nts.setAttribute('transform','translate('+(22*f)+' '+(16*f)+')');}
+ else nts.setAttribute('transform','translate(0 0)');
+ $('postHalo').style.opacity=u>=chemicalEnd?'.5':'0';
+ const i=u<.17?0:u<apEnd?1:u<terminalEnd?2:u<chemicalEnd?3:4;
+ $('wholeCaption').textContent=wholeMessages[i];
+}
+function wholeStop(){wholeRunning=false;if(wholeTimer!==null)cancelAnimationFrame(wholeTimer);wholeTimer=null;$('wholePlay').textContent='▶ Play neuron animation'}
+function wholeFrame(now){if(!wholeRunning)return;const elapsed=wholeElapsed+(now-wholeStart),duration=17500;wholeDraw(elapsed/duration);if(elapsed>=duration){wholeElapsed=duration;wholeStop();return}wholeTimer=requestAnimationFrame(wholeFrame)}
+$('wholePlay').addEventListener('click',()=>{if(wholeElapsed>=17500)wholeElapsed=0;wholeStop();wholeRunning=true;wholeStart=performance.now();$('wholePlay').textContent='Playing…';wholeTimer=requestAnimationFrame(wholeFrame)});
+$('wholePause').addEventListener('click',()=>{if(wholeRunning)wholeElapsed=Math.min(17500,wholeElapsed+performance.now()-wholeStart);wholeStop()});
+$('wholeReset').addEventListener('click',()=>{wholeStop();wholeElapsed=0;wholeDraw(0)});
+function showActivity(name){wholeStop();stop();const whole=name==='whole';$('wholeActivity').classList.toggle('hidden-activity',!whole);$('synapseActivity').classList.toggle('hidden-activity',whole);$('tabWhole').classList.toggle('active',whole);$('tabSynapse').classList.toggle('active',!whole);$('tabWhole').setAttribute('aria-pressed',String(whole));$('tabSynapse').setAttribute('aria-pressed',String(!whole));}
+$('tabWhole').addEventListener('click',()=>showActivity('whole'));$('tabSynapse').addEventListener('click',()=>showActivity('synapse'));wholeDraw(0);
+
+const questions=[{q:'What directly triggers synaptic vesicle fusion?',a:['Na⁺ entering the postsynaptic neuron','Ca²⁺ entering the presynaptic terminal','K⁺ leaving the postsynaptic neuron'],correct:1,why:'Ca²⁺ entry into the presynaptic terminal triggers vesicle fusion and exocytosis.'},{q:'How does neurotransmitter cross the synaptic cleft?',a:['By diffusion','Through voltage-gated Na⁺ channels','By travelling inside an action potential'],correct:0,why:'Released neurotransmitter diffuses across the synaptic cleft.'},{q:'What opens the postsynaptic ion channels shown in this example?',a:['An arriving action potential directly','Binding of neurotransmitter to its receptor','ATP hydrolysis by the sodium–potassium pump'],correct:1,why:'These are ligand-gated channels, opened by neurotransmitter binding.'},{q:'Does every excitatory postsynaptic potential produce an action potential?',a:['Yes, always','No; threshold must be reached at the trigger zone','Only when vesicles contain calcium'],correct:1,why:'An EPSP is graded. Summation of synaptic inputs may be needed to reach action-potential threshold.'},{q:'Which sequence is correct?',a:['Neurotransmitter release → Ca²⁺ entry → action potential','Action potential → Ca²⁺ entry → vesicle fusion → receptor binding','Receptor binding → vesicle fusion → action potential'],correct:1,why:'Presynaptic depolarisation opens Ca²⁺ channels; Ca²⁺ triggers release; neurotransmitter binds postsynaptic receptors.'}];const quiz=$('quiz');questions.forEach((item,i)=>{const block=document.createElement('div');block.className='question';const title=document.createElement('strong');title.textContent=(i+1)+'. '+item.q;block.appendChild(title);item.a.forEach((a,j)=>{const label=document.createElement('label');const radio=document.createElement('input');radio.type='radio';radio.name='q'+i;radio.value=j;radio.addEventListener('change',()=>{const good=j===item.correct;feedback.className='feedback '+(good?'correct':'incorrect');feedback.textContent=(good?'Correct. ':'Not quite. ')+item.why});label.append(radio,' '+a);block.appendChild(label)});const feedback=document.createElement('div');feedback.className='feedback';feedback.setAttribute('aria-live','polite');block.appendChild(feedback);quiz.appendChild(block)})})();
+</script></body></html>
