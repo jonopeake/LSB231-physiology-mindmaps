@@ -1,0 +1,259 @@
+<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Muscle contraction explorer</title><style>
+:root{font-family:Arial,Helvetica,sans-serif;color:#17334a;background:#f5f8fb}*{box-sizing:border-box}body{margin:0;padding:20px}.wrap{max-width:1050px;margin:auto}h1{font-size:27px;margin:0 0 8px}h2{font-size:21px;margin:0 0 12px}p{line-height:1.5}.intro{color:#506779;margin:0 0 20px}.tabs,.controls{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}button{border:1px solid #a5bdcf;border-radius:9px;background:white;color:#17334a;padding:10px 15px;font-size:15px;cursor:pointer}button.active,button.primary{background:#087eaf;color:white;border-color:#087eaf}button:hover{filter:brightness(.96)}.panel{background:white;border:1px solid #d9e5ed;border-radius:14px;padding:20px;margin-bottom:15px;box-shadow:0 3px 12px #102a4310}.hidden{display:none}.diagram{width:100%;height:auto;display:block;background:#f8fbfe;border:1px solid #e1ebf1;border-radius:12px}.note{padding:12px 14px;background:#eaf5fb;border-left:4px solid #1593c3;border-radius:5px;margin:14px 0;font-size:15px}.step{font-weight:bold;color:#087eaf}.muted{color:#526b7b}.layout{display:grid;grid-template-columns:1fr 1fr;gap:16px}.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:#466074}.key{display:inline-block;width:14px;height:9px;border-radius:3px;margin-right:5px}.quizitem{padding:13px 0;border-bottom:1px solid #e1ebf1}.quizitem:last-child{border:0}.quizitem button{display:block;width:100%;text-align:left;margin:7px 0}.feedback{min-height:20px;font-size:14px;font-weight:600}.correct{color:#087c4a}.wrong{color:#a24529}input[type=range]{width:min(450px,100%);accent-color:#087eaf}.metric{font-weight:700;color:#0b6996}.stat{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}.pill{background:#eaf4fa;padding:6px 10px;border-radius:20px;font-size:13px}svg text{font-family:Arial,Helvetica,sans-serif} .focus{filter:drop-shadow(0 0 5px #f4b647)}@media(max-width:650px){body{padding:10px}.panel{padding:13px}.layout{grid-template-columns:1fr}h1{font-size:23px}}
+
+.ec-explain{margin:10px 0 0;min-height:82px}.ec-explain #ecText{margin-top:5px;line-height:1.45}.ec-controls{align-items:center}.ec-diagram{max-height:480px}.ec-anim{transition:opacity 850ms ease,transform 1500ms ease,stroke 850ms ease}.ec-filament{transition:transform 1800ms ease}.ec-indicator{transition:opacity 700ms ease}.ec-head{transition:transform 1500ms ease-in-out;transform-box:view-box}
+/* Compact the first activity so the complete sequence fits typical laptop viewports. */
+body{padding:12px 16px}.wrap{max-width:1050px}h1{font-size:24px;margin-bottom:4px}.intro{font-size:14px;line-height:1.35;margin-bottom:8px}.tabs{margin:8px 0;gap:6px}.tabs button{padding:7px 10px;font-size:13px}.panel{padding:12px 16px;margin-bottom:8px}#coupling h2{font-size:19px;margin:0 0 5px}#coupling .ec-controls{margin:6px 0;gap:7px}#coupling .ec-controls button{padding:7px 11px;font-size:14px}#coupling .ec-explain{margin:6px 0;min-height:0;padding:8px 11px;font-size:14px;line-height:1.3}#coupling .ec-explain #ecText{margin-top:3px;line-height:1.3}#coupling .ec-diagram{height:min(43vh,345px);min-height:250px;width:100%;object-fit:contain}#coupling .ec-diagram + p{font-size:12px!important;margin:5px 0 0!important;line-height:1.25}@media(max-width:650px){body{padding:8px}#coupling .ec-diagram{height:auto;min-height:0}.tabs button{font-size:12px}}
+
+/* Cross-bridge activity: compact layout matching excitation–contraction coupling. */
+#crossbridge h2{font-size:19px;margin:0 0 5px}
+#crossbridge .cb-controls{margin:6px 0;gap:7px;align-items:center}
+#crossbridge .cb-controls button{padding:7px 11px;font-size:14px}
+#crossbridge .cb-explain{margin:6px 0;padding:8px 11px;font-size:14px;line-height:1.3}
+#crossbridge .cb-explain #cbText{margin-top:3px;line-height:1.3}
+#crossbridge .cb-diagram{height:min(43vh,345px);min-height:210px;width:100%}
+#crossbridge .cb-footnote{font-size:12px;margin:5px 0 0;line-height:1.25}
+.cb-motion{transition:transform 1700ms ease-in-out,opacity 800ms ease,fill 800ms ease}
+#cbThin{transition:transform 1700ms ease-in-out}
+#cbTropomyosin{transition:transform 1800ms ease-in-out}
+#cbCalcium{transition:transform 1700ms ease-in-out,opacity 500ms ease}
+#cbCalciumBound{transition:opacity 600ms ease}
+#cbTropomyosin path{transition:stroke 800ms ease}
+@media(max-width:650px){#crossbridge .cb-diagram{height:auto;min-height:0}}
+#crossbridge.cb-fast .cb-motion,#crossbridge.cb-fast #cbThin{transition-duration:850ms!important}
+ .sarc-slider{width:min(450px,100%);margin:8px 0 12px}.sarc-slider input[type=range]{display:block;width:100%;margin:8px 0 3px}.sarc-slider-ends{display:flex;justify-content:space-between;gap:10px;font-size:13px;font-weight:600;color:#526b7b}
+/* Keep the sliding-filament illustration and its explanatory text together on laptop screens. */
+#sarcomere{padding:9px 14px 11px}
+#sarcomere h2{font-size:18px;margin:0 0 3px}
+#sarcomere>p.muted{font-size:13px;line-height:1.25;margin:0 0 4px}
+#sarcomere .sarc-slider{margin:3px 0 6px;width:min(450px,100%)}
+#sarcomere .sarc-slider label{font-size:13px}
+#sarcomere .sarc-slider input[type=range]{margin:3px 0 1px}
+#sarcomere .sarc-slider-ends{font-size:12px}
+#sarcomere #sarcSvg{height:min(39vh,315px);min-height:235px;width:100%;object-fit:contain}
+#sarcomere .legend{margin-top:4px;gap:12px;font-size:12px}
+#sarcomere .note{font-size:13px;line-height:1.3;padding:7px 10px;margin:6px 0}
+#sarcomere .layout{gap:8px}
+#sarcomere .pill{font-size:12px;padding:5px 8px;border-radius:9px}
+@media(max-width:650px){#sarcomere #sarcSvg{height:auto;min-height:0}#sarcomere .layout{grid-template-columns:1fr}}
+</style></head><body><main class="wrap"><h1>Muscle contraction: from electrical signal to force</h1><p class="intro">Explore how an action potential triggers calcium release, how actin and myosin generate force, and why a sarcomere shortens without its filaments becoming shorter.</p><nav class="tabs" aria-label="Explorer activities"><button class="active" data-tab="coupling">1. Excitation–contraction coupling</button><button data-tab="sarcomere">2. Sliding filament theory</button><button data-tab="crossbridge">3. Cross-bridge cycle</button><button data-tab="quiz">4. Check your understanding</button></nav>
+<section class="panel" id="coupling"><h2>From action potential to contraction</h2>
+<div class="controls ec-controls"><button id="ecPlay" class="primary">▶ Play sequence</button><button id="ecPrev">◀ Previous</button><button id="ecNext">Next ▶</button><span class="pill" id="ecCounter">Ready</span></div>
+
+<div class="note ec-explain" aria-live="polite"><span class="step" id="ecTitle">Ready to explore</span><div id="ecText">Use Next or Play sequence to see how electrical excitation produces muscle tension.</div></div>
+<svg class="diagram ec-diagram" viewBox="0 0 920 445" role="img" aria-label="Skeletal muscle fibre schematic showing an action potential moving into a T-tubule, calcium release from sarcoplasmic reticulum and actin–myosin interactions">
+<rect x="20" y="15" width="880" height="415" rx="15" fill="#f2f8fc"/><text x="875" y="40" text-anchor="end" font-size="17" font-weight="bold" fill="#2d536e">Inside a skeletal muscle fibre (simplified)</text>
+<!-- Neuromuscular junction: motor axon terminal lies immediately above the sarcolemma. -->
+<path d="M46 48 H121" stroke="#7389b6" stroke-width="7" stroke-linecap="round" fill="none"/>
+<path d="M120 48 Q137 33 155 40 Q176 46 175 60 Q172 69 151 68 Q130 66 120 48 Z" fill="#a4b4dc" stroke="#5c72a5" stroke-width="2"/>
+<text x="188" y="43" font-size="13" fill="#52699a">Motor neuron axon terminal</text>
+<g id="ecTerminalSignal" opacity="0"><circle cx="0" cy="0" r="7" fill="#ffd04b" stroke="#b67b0a" stroke-width="1.5"/><animateMotion id="ecTerminalMotion" begin="indefinite" dur="0.8s" fill="freeze" path="M55 48 H149"/></g>
+<g id="ecACh" opacity="0" fill="#6bba82"><circle cx="146" cy="74" r="3"/><circle cx="157" cy="74" r="3"/><circle cx="168" cy="74" r="3"/></g>
+<path d="M40 82 H335 Q350 82 350 100 V206 Q350 224 370 224 Q390 224 390 206 V100 Q390 82 405 82 H878" stroke="#2679a5" stroke-width="11" fill="none" stroke-linecap="round"/><text x="455" y="70" font-size="15" fill="#2679a5">Sarcolemma</text><text x="370" y="247" font-size="15" text-anchor="middle" fill="#2679a5">T-tubule</text>
+<rect id="sr" class="ec-anim" x="440" y="113" width="393" height="115" rx="12" stroke="#ba745c" stroke-width="7" fill="#fff0e8"/><text x="638" y="137" text-anchor="middle" font-size="16" fill="#96543e" font-weight="bold">Sarcoplasmic reticulum (SR)</text>
+<g id="calcium" fill="#e8a53b">
+<circle class="ec-moving-ca" cx="492" cy="174" r="8"/>
+<circle class="ec-moving-ca" cx="539" cy="193" r="8"/>
+<circle class="ec-moving-ca" cx="588" cy="166" r="8"/>
+<circle class="ec-moving-ca" cx="640" cy="192" r="8"/>
+<circle class="ec-moving-ca" cx="695" cy="170" r="8"/>
+<circle class="ec-moving-ca" cx="756" cy="193" r="8"/>
+</g>
+<g id="signal" opacity="0"><circle cx="0" cy="0" r="12" fill="#ffcf4d" stroke="#b67b0a" stroke-width="2"/><path d="M-24 -18 l12 -13 12 13 12 -13" fill="none" stroke="#d59b13" stroke-width="3"/><animateMotion id="ecSignalMotion" begin="indefinite" dur="2.0s" fill="freeze" path="M155 82 H335 Q350 82 350 100 V206 Q350 224 370 224"/></g>
+
+<text x="69" y="336" font-size="14" fill="#b84962">Actin (thin filament)</text><text x="69" y="384" font-size="14" fill="#346d9f">Myosin (thick filament)</text>
+<g id="actinEC" class="ec-filament"><path d="M330 331 H797" stroke="#d65b73" stroke-width="12" stroke-linecap="round"/></g>
+<path d="M405 380 H756" stroke="#497fb4" stroke-width="17" stroke-linecap="round"/><g id="headsEC" stroke="#497fb4" stroke-width="8" stroke-linecap="round" fill="none"><path id="ecHead1" class="ec-head" d="M465 377 L465 333"/><path id="ecHead2" class="ec-head" d="M525 377 L525 333"/><path id="ecHead3" class="ec-head" d="M585 377 L585 333"/><path id="ecHead4" class="ec-head" d="M645 377 L645 333"/></g>
+<path id="ecTropomyosin" d="M438 340 Q470 345 502 340 T566 340 T630 340 T694 340" stroke="#8967a4" stroke-width="5" fill="none" style="transition:transform 1300ms ease-in-out"/>
+<ellipse id="ecTroponin" cx="610" cy="340" rx="17" ry="11" fill="#8b74b8" stroke="#604b8e" stroke-width="2"/>
+<text x="695" y="356" font-size="12" fill="#604b8e">Troponin</text>
+
+<text x="69" y="405" font-size="12" fill="#607b8e">Diagram not to scale; filament motion is schematic.</text>
+</svg><p class="muted" style="font-size:13px;margin:9px 0 0">Yellow particles represent Ca²⁺. Watch the ions move continuously from the SR into the sarcoplasm; one reaches and binds troponin.</p></section>
+<section class="panel hidden" id="sarcomere"><h2>Explore sarcomere shortening</h2><p class="muted">Move the slider to shorten or lengthen the sarcomere. Notice which bands change and which remain constant.</p><div class="sarc-slider"><label for="shorten">Contraction level: <span id="pct" class="metric">0%</span></label><input id="shorten" type="range" min="0" max="100" value="0" step="1"><div class="sarc-slider-ends"><span>Relaxed: 0%</span><span>Contraction: 100%</span></div></div><svg id="sarcSvg" class="diagram" viewBox="0 0 920 425" role="img" aria-label="Interactive sarcomere with fixed length thick and thin filaments and moving Z discs"><g id="sarcBody"></g><g id="sarcAnnotations"></g></svg><div class="legend"><span><i class="key" style="background:#d65b73"></i>Thin filament (actin)</span><span><i class="key" style="background:#497fb4"></i>Thick filament (myosin)</span></div><div class="note" id="sarcText">At rest, actin and myosin overlap partially. During shortening, thin filaments slide towards the centre of the sarcomere.</div><div class="layout"><div class="pill">A-band (thick filament length): <strong>unchanged</strong></div><div class="pill">I-band and H-zone: <strong id="bandChange">decrease during contraction</strong></div></div></section>
+<section class="panel hidden" id="crossbridge"><h2>The cross-bridge cycle</h2>
+<div class="controls cb-controls"><button id="cbPlay" class="primary">▶ Play sequence</button><button id="cbPrev">◀ Previous</button><button id="cbNext">Next ▶</button><button id="cbLoop" aria-pressed="true">↻ Repeat: on</button><span class="pill" id="cbCounter">Step 1 of 7</span></div>
+<div class="note cb-explain" aria-live="polite"><span id="cbTitle" class="step">1. Resting state</span><div id="cbText"></div></div>
+<svg class="diagram cb-diagram" viewBox="0 0 920 310" role="img" aria-label="Cross-bridge cycling showing calcium binding to troponin, tropomyosin exposing actin binding sites, and an anchored myosin head">
+<rect x="20" y="15" width="880" height="280" rx="15" fill="#f2f8fc"/>
+<text x="45" y="47" font-size="18" font-weight="bold" fill="#345b75">Actin–myosin interaction (schematic)</text>
+<text x="46" y="85" font-size="16" fill="#b84962" font-weight="bold">Actin (thin filament)</text>
+<g id="cbThin" class="cb-motion"><path d="M260 105 H850" stroke="#d65b73" stroke-width="16" stroke-linecap="round"/>
+<g id="sites" fill="#f3c6cf" stroke="#b84962" stroke-width="2"><circle cx="405" cy="105" r="10"/><circle cx="470" cy="105" r="10"/><circle cx="535" cy="105" r="10"/></g>
+<g id="cbTropomyosin"><path d="M270 108 Q335 96 400 108 T530 108 T660 108 T840 108" stroke="#8a6ca8" stroke-width="9" stroke-linecap="round" fill="none"/>
+<text x="705" y="143" font-size="13" font-weight="bold" fill="#775493">Tropomyosin</text></g>
+<g id="cbTroponin"><circle cx="585" cy="108" r="15" fill="#e5ae56" stroke="#9a6a20" stroke-width="2"/><text x="610" y="84" font-size="14" font-weight="bold" fill="#8e641f">Troponin</text></g>
+<g id="cbCalcium" opacity="1"><circle cx="575" cy="55" r="9" fill="#37a2a0"/><circle cx="600" cy="52" r="9" fill="#37a2a0"/><text x="617" y="57" font-size="13" fill="#257c7b" font-weight="bold">Ca²⁺</text></g>
+<g id="cbCalciumBound" opacity="0"><circle cx="580" cy="97" r="6" fill="#37a2a0" stroke="white" stroke-width="1"/><circle cx="593" cy="98" r="6" fill="#37a2a0" stroke="white" stroke-width="1"/></g>
+</g>
+<text x="46" y="254" font-size="16" fill="#346d9f" font-weight="bold">Myosin (thick filament)</text>
+<path d="M260 245 H850" stroke="#497fb4" stroke-width="18" stroke-linecap="round"/>
+<g id="head" class="cb-motion"><path id="neck" d="M430 245 Q437 184 465 126" fill="none" stroke="#497fb4" stroke-width="14" stroke-linecap="round"/>
+<ellipse id="headShape" cx="465" cy="126" rx="27" ry="20" fill="#6b9dc9" stroke="#2f5c85" stroke-width="3"/></g>
+<text id="molecule" class="cb-motion" x="565" y="177" font-size="18" font-weight="bold" fill="#a66c17"></text>
+<text x="46" y="282" font-size="12" fill="#607b8e">Not to scale. The moving myosin head is one of many cross-bridges.</text>
+</svg>
+</section>
+<section class="panel hidden" id="quiz"><h2>Check your understanding</h2><p class="muted">Select an answer to receive immediate feedback.</p><div id="questions"></div><div class="note" id="score">Answered 0 of 6 • Correct: 0</div><button id="resetQuiz">Try again</button></section></main>
+<script>
+const $=id=>document.getElementById(id);document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-tab]').forEach(x=>x.classList.toggle('active',x===b));['coupling','sarcomere','crossbridge','quiz'].forEach(id=>$(id).classList.toggle('hidden',id!==b.dataset.tab))}));
+const ecSteps=[['Ready to explore','Use Next or Play sequence to see how electrical excitation produces muscle tension.'],['1. Neuromuscular excitation','A motor neuron action potential reaches the axon terminal. Acetylcholine is released at the neuromuscular junction, triggering a muscle action potential that propagates along the sarcolemma and down the T-tubule.'],['2. Calcium release','Depolarisation of the T-tubule membrane triggers the sarcoplasmic reticulum to release Ca²⁺ into the sarcoplasm.'],['3. Binding sites exposed','Ca²⁺ binds to troponin. Tropomyosin moves away from the myosin-binding sites on actin.'],['4. Cross-bridge cycling','Myosin heads attach to exposed binding sites on actin. ATP-dependent cross-bridge cycling produces repeated power strokes.'],['5. Muscle tension','The combined activity of many cross-bridges generates muscle tension. When shortening occurs, actin slides relative to myosin; neither filament becomes shorter.'],['6. Relaxation','When excitation stops, Ca²⁺ is pumped back into the sarcoplasmic reticulum by ATP-dependent pumps. Binding sites are covered again and active tension declines.']];
+let ec=0,ecTimer=null,ecDelay=null,ecPlaying=false;
+function drawEC(){
+const [title,txt]=ecSteps[ec];
+$('ecTitle').textContent=title;$('ecText').textContent=txt;$('ecCounter').textContent=ec?`Phase ${ec} of 6`:'Ready';
+$('signal').setAttribute('opacity',ec===1?'1':'0');
+$('ecTerminalSignal').setAttribute('opacity',ec===1?'1':'0');
+$('ecACh').setAttribute('opacity',ec===1?'1':'0');
+// Restart a motion path that follows the sarcolemma and descends into the T-tubule.
+// The signal represents a travelling region of membrane depolarisation.
+if(ec===1){$('ecTerminalMotion').beginElement();$('ecSignalMotion').beginElementAt(0.85)}else{$('ecTerminalMotion').endElement();$('ecSignalMotion').endElement()}
+const active=ec>=2&&ec<=5,bound=ec>=3&&ec<=5;
+// Animate the actual calcium ions from their positions inside the SR, rather than
+// making a second group appear after release. One ion travels directly to troponin.
+const caOffsets=[[3,80],[11,83],[20,160],[29,83],[40,78],[-21,75]];
+const caIons=[...document.querySelectorAll('.ec-moving-ca')];
+caIons.forEach((ion,i)=>{
+  ion.style.transition='transform 2700ms linear';
+  ion.style.transform=active?`translate(${caOffsets[i][0]}px,${caOffsets[i][1]}px)`:'translate(0px,0px)';
+});
+$('sr').setAttribute('stroke',ec===2?'#e8a53b':'#ba745c');
+$('ecTropomyosin').style.transform=bound?'translate(0px,12px)':'translate(0px,0px)';
+
+// Fixed-length myosin heads pivot about their attachment points on the thick filament.
+// Rotation, rather than changing path geometry, avoids apparent stretching.
+[465,525,585,645].forEach((x,i)=>{
+ const angle=ec===4?0:ec===5?-14:48;
+ const head=$('ecHead'+(i+1));
+ head.style.transformOrigin=`${x}px 377px`;
+ head.style.transform=`rotate(${angle}deg)`;
+});
+$('actinEC').setAttribute('transform',ec===5?'translate(-20 0)':'translate(0 0)');
+$('ecPlay').textContent=ecPlaying?'■ Stop sequence':'▶ Play sequence';
+}
+function stopEC(){clearTimeout(ecTimer);clearTimeout(ecDelay);ecPlaying=false}function setEC(n){stopEC();ec=Math.max(0,Math.min(6,n));drawEC()}
+$('ecPrev').onclick=()=>setEC(ec-1);$('ecNext').onclick=()=>setEC(ec+1);
+function advanceEC(){if(!ecPlaying)return;if(ec>=6){stopEC();drawEC();return}ec++;drawEC();if(ec<6)ecTimer=setTimeout(advanceEC,2900)}
+$('ecPlay').onclick=()=>{if(ecPlaying){stopEC();drawEC();return}stopEC();ec=0;ecPlaying=true;drawEC();ecDelay=setTimeout(advanceEC,200)};drawEC();
+function svgEl(tag,attrs,parent){const e=document.createElementNS('http://www.w3.org/2000/svg',tag);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));parent.appendChild(e);return e}function svgText(parent,x,y,t,attrs={}){const e=svgEl('text',{x,y,'font-size':15,fill:'#35546a',...attrs},parent);e.textContent=t;return e}function drawSarc(){
+ const v=+$('shorten').value/100;
+ $('pct').textContent=Math.round(v*100)+'%';
+ const b=$('sarcBody'),a=$('sarcAnnotations');b.replaceChildren();a.replaceChildren();
+ const left=105+100*v,right=815-100*v,mid=460,thickL=315,thickR=605,thinLength=260;
+ svgEl('rect',{x:left,y:60,width:right-left,height:215,rx:8,fill:'#f1f7fb'},b);
+ // Jagged Z-discs, with fixed vertical extent as the sarcomere shortens.
+ for(const x of [left,right]){
+  let d=`M ${x} 52`;
+  for(let y=62;y<=282;y+=10)d+=` L ${x+(Math.round((y-62)/10)%2===0?6:-6)} ${y}`;
+  svgEl('path',{d,fill:'none',stroke:'#394e65','stroke-width':5,'stroke-linejoin':'round'},b);
+ }
+ for(const y of [120,174,228]){
+  svgEl('line',{x1:left+5,y1:y,x2:left+thinLength,y2:y,stroke:'#d65b73','stroke-width':9,'stroke-linecap':'round'},b);
+  svgEl('line',{x1:right-5,y1:y,x2:right-thinLength,y2:y,stroke:'#d65b73','stroke-width':9,'stroke-linecap':'round'},b);
+  svgEl('line',{x1:thickL,y1:y+13,x2:thickR,y2:y+13,stroke:'#497fb4','stroke-width':15,'stroke-linecap':'round'},b);
+  // Short, constant-length myosin heads: bases remain attached to the thick
+  // filament, while their tips pivot through successive power strokes.
+  // Keep heads out of the H-zone, where no actin is present.
+  for(const side of [-1,1]){
+   for(const offset of [32,67,102,137]){
+    const baseX=mid+side*offset;
+    const actinEnd=side<0?left+thinLength:right-thinLength;
+    const overlaps=side<0?baseX<=actinEnd-5:baseX>=actinEnd+5;
+    if(!overlaps || baseX<thickL+8 || baseX>thickR-8)continue;
+    const pivotX=baseX,pivotY=y+7;
+    // One-way power stroke while attached, followed by ATP-dependent
+    // detachment and a recovery stroke while detached from actin.
+    // The heads are phase-offset to depict asynchronous cross-bridge cycling.
+    const phase=(v*4 + offset/137*0.27 + (y-120)/108*0.19)%1;
+    const attached=phase<0.46;
+    const recovering=phase>=0.62;
+    const progress=attached?phase/0.46:recovering?(phase-0.62)/0.38:1;
+    // Heads on either half pull the thin filament towards the M-line.
+    // In the recovery phase they swing back without exerting a reverse pull.
+    const swing=attached?progress:recovering?1-progress:1;
+    const angle=(-Math.PI/2)-side*(-0.28+0.86*swing);
+    const headColour=attached?'#274e79':'#8da5b9';
+    const headOpacity=attached?'1':'0.68';
+    const headLength=12;
+    const tipX=pivotX+headLength*Math.cos(angle),tipY=pivotY+headLength*Math.sin(angle);
+    svgEl('line',{x1:pivotX,y1:pivotY,x2:tipX,y2:tipY,stroke:headColour,opacity:headOpacity,'stroke-width':3.2,'stroke-linecap':'round'},b);
+    svgEl('ellipse',{cx:tipX,cy:tipY,rx:4.6,ry:3.1,fill:headColour,opacity:headOpacity,transform:`rotate(${angle*180/Math.PI+90} ${tipX} ${tipY})`},b);
+   }
+  }
+ }
+ svgEl('line',{x1:mid,y1:55,x2:mid,y2:281,stroke:'#7b8b99','stroke-dasharray':'5 5','stroke-width':2},b);
+ svgText(a,left,38,'Z-disc',{'text-anchor':'middle'});
+ svgText(a,right,38,'Z-disc',{'text-anchor':'middle'});
+ svgText(a,mid,36,'M-line',{'text-anchor':'middle'});
+ // Brackets identify the I-band (thin filaments only) and H-zone (thick filaments only).
+ function bracket(x1,x2,y,label){if(x2-x1<9)return;svgEl('path',{d:`M${x1} ${y+6} V${y} H${x2} V${y+6}`,fill:'none',stroke:'#728293','stroke-width':1.6},a);svgText(a,(x1+x2)/2,y-7,label,{'text-anchor':'middle','font-size':13});}
+ bracket(left+7,thickL,108,'I-band');
+ bracket(thickR,right-7,108,'I-band');
+ const hLeft=Math.max(thickL,left+thinLength),hRight=Math.min(thickR,right-thinLength);
+ if(hRight-hLeft>17)bracket(hLeft,hRight,160,'H-zone');
+ svgEl('line',{x1:thickL,y1:297,x2:thickR,y2:297,stroke:'#497fb4','stroke-width':2},a);
+ svgText(a,mid,319,'A-band: constant',{'text-anchor':'middle','font-size':16});
+ // Labels align on the left, distinguishing the sarcomere from the whole-muscle inset.
+ svgText(a,32,319,'Sarcomere',{'font-size':16,'font-weight':'600'});
+ // Inset: a whole skeletal muscle shortens in synchrony with the sarcomere slider.
+ svgText(a,32,377,'Whole muscle',{'font-size':16,'font-weight':'600'});
+ const cx=555, muscleWidth=260-92*v, x1=cx-muscleWidth/2,x2=cx+muscleWidth/2;
+ svgEl('line',{x1:x1-38,y1:374,x2:x1,y2:374,stroke:'#9cacc0','stroke-width':6,'stroke-linecap':'round'},b);
+ svgEl('line',{x1:x2,y1:374,x2:x2+38,y2:374,stroke:'#9cacc0','stroke-width':6,'stroke-linecap':'round'},b);
+ svgEl('path',{d:`M${x1} 374 Q${x1+20} ${344+8*v} ${cx} ${344+8*v} Q${x2-20} ${344+8*v} ${x2} 374 Q${x2-20} ${404-8*v} ${cx} ${404-8*v} Q${x1+20} ${404-8*v} ${x1} 374Z`,fill:'#d77f8e',stroke:'#ae5064','stroke-width':2},b);
+ for(let k=-2;k<=2;k++)svgEl('path',{d:`M${x1+19} ${374+k*4} Q${cx} ${374+k*6} ${x2-19} ${374+k*4}`,stroke:'#f2c0c9','stroke-width':1.6,fill:'none'},b);
+ svgText(a,760,379,v===0?'Relaxed': 'Shortening',{'text-anchor':'middle','font-size':14});
+ $('sarcText').textContent=v===0?'At rest, actin and myosin overlap partially. During shortening, thin filaments slide towards the centre of the sarcomere.':v<.75?'As the Z-discs move closer together, actin overlaps more of the myosin filament. Neither filament becomes shorter.':'At substantial shortening, the Z-discs are closer together and filament overlap is greater. This schematic does not model limits to shortening or force.';
+ $('bandChange').textContent=v===0?'decrease during contraction':'reduced as shortening increases';
+}
+$('shorten').oninput=drawSarc;drawSarc();
+const cbSteps=[
+['1. Resting state','At rest, tropomyosin covers the myosin-binding sites on actin. Calcium has not yet bound to troponin.','',0],
+['2. Calcium binds to troponin','Ca²⁺ binds to troponin. Tropomyosin shifts away from the binding sites on actin, allowing myosin to attach.','Ca²⁺',1],
+['3. Cross-bridge formation','An energised myosin head carrying ADP and inorganic phosphate (Pi) attaches to an exposed site on actin.','ADP + Pi',2],
+['4. Power stroke','Release of Pi, followed by ADP, accompanies the power stroke. The myosin head pivots while remaining anchored to the thick filament, pulling actin.','Pi and ADP released',3],
+['5. Detachment from actin','A new ATP molecule binds to myosin. The myosin head detaches from actin, but remains connected to the thick filament.','ATP',4],
+['6. Reactivation','Myosin hydrolyses ATP to ADP and Pi, returning the head to its energised position. With Ca²⁺ still bound to troponin, another cycle can begin.','ADP + Pi',5],
+['7. Relaxation','When excitation ends, Ca²⁺ is pumped back into the sarcoplasmic reticulum. Ca²⁺ dissociates from troponin, tropomyosin covers the binding sites again, and cross-bridge cycling stops.','Ca²⁺ removed',6]
+];
+let cb=0,cbTimer=null,cbLoop=true,cbPlaying=false,cbFast=false;
+function stopCB(){if(cbTimer!==null)clearTimeout(cbTimer);cbTimer=null;cbPlaying=false;cbFast=false;document.getElementById('crossbridge').classList.remove('cb-fast');$('cbPlay').textContent='▶ Play sequence'}
+function drawCB(){
+const [title,description,molecule,state]=cbSteps[cb];
+$('cbTitle').textContent=title;$('cbText').textContent=description;
+$('cbCounter').textContent=`Step ${cb+1} of ${cbSteps.length}`;
+$('molecule').textContent=molecule;
+const head=$('head'),thin=$('cbThin');
+head.style.transformOrigin='430px 245px'; // Myosin stays attached to the thick filament.
+head.style.transform=state===3?'rotate(-20deg)':state===4||state===5?'rotate(24deg)':'rotate(0deg)';
+thin.style.transform=state>=3&&state<=5?'translate(-28px,0px)':'translate(0px,0px)';
+$('headShape').setAttribute('fill',state===2||state===3?'#e8ae55':'#6b9dc9');
+// Tropomyosin blocks actin at rest; calcium binding moves it clear of the sites.
+$('cbTropomyosin').style.transform=state>=1&&state<=5?'translate(0px,17px)':'translate(0px,0px)';
+$('cbCalcium').style.opacity=state>=1&&state<=5?'0':'1';
+$('cbCalcium').style.transform=state>=1&&state<=5?'translate(0px,42px)':'translate(0px,0px)';
+$('cbCalciumBound').style.opacity=state>=1&&state<=5?'1':'0';
+$('sites').setAttribute('opacity',state>=1&&state<=5?'1':'.3');
+}
+function cbAdvance(){
+ if(!cbPlaying)return;
+ if(cb<cbSteps.length-1){cb++;drawCB();cbTimer=setTimeout(cbAdvance,cbFast?1450:(cb===cbSteps.length-1?4200:3200))}
+ else if(cbLoop){cbFast=true;document.getElementById('crossbridge').classList.add('cb-fast');cb=0;drawCB();cbTimer=setTimeout(cbAdvance,1450)}
+ else stopCB();
+}
+$('cbPlay').onclick=()=>{
+ if(cbPlaying){stopCB();return}
+ if(cb===cbSteps.length-1)cb=0;
+ cbPlaying=true;cbFast=false;document.getElementById('crossbridge').classList.remove('cb-fast');drawCB();$('cbPlay').textContent='❚❚ Pause';
+ cbTimer=setTimeout(cbAdvance,cb===0?2800:3200);
+};
+$('cbLoop').onclick=()=>{
+ cbLoop=!cbLoop;
+ $('cbLoop').textContent=cbLoop?'↻ Repeat: on':'↻ Repeat: off';
+ $('cbLoop').setAttribute('aria-pressed',String(cbLoop));
+};
+$('cbPrev').onclick=()=>{stopCB();cb=Math.max(0,cb-1);drawCB()};
+$('cbNext').onclick=()=>{stopCB();cb=Math.min(cbSteps.length-1,cb+1);drawCB()};
+drawCB();
+const questions=[['Which event directly triggers calcium release from the sarcoplasmic reticulum?',['Acetylcholine binding to troponin','Depolarisation of the T-tubule membrane','ATP binding to actin'],1,'An action potential propagates into T-tubules, initiating calcium release from the sarcoplasmic reticulum.'],['What does calcium bind to during skeletal muscle contraction?',['Troponin','Myosin ATPase','Tropomyosin'],0,'Calcium binds troponin, which permits tropomyosin to move away from myosin-binding sites on actin.'],['What happens to the A-band when a sarcomere shortens?',['It shortens','It disappears','Its length stays constant'],2,'The A-band corresponds to the length of thick filaments, which does not change during contraction.'],['What causes a myosin head to detach from actin?',['Binding of a new ATP molecule','Release of calcium from the SR','Release of acetylcholine'],0,'ATP binding to myosin causes detachment from actin.'],['Which statement best describes the sliding filament theory?',['Actin and myosin filaments become shorter','Actin slides past myosin, increasing overlap','Myosin filaments slide out of the sarcomere'],1,'Thin filaments move relative to thick filaments; filament lengths remain unchanged.'],['Which process requires ATP during muscle relaxation?',['Calcium pumping back into the sarcoplasmic reticulum','Calcium binding to troponin','Action potential conduction along the sarcolemma'],0,'SERCA pumps use ATP to transport calcium into the sarcoplasmic reticulum.']];let answers={};function buildQuiz(){const root=$('questions');root.replaceChildren();questions.forEach((q,i)=>{const div=document.createElement('div');div.className='quizitem';const title=document.createElement('p');title.innerHTML=`<strong>${i+1}. ${q[0]}</strong>`;div.appendChild(title);const feed=document.createElement('div');feed.className='feedback';q[1].forEach((opt,j)=>{const b=document.createElement('button');b.textContent=String.fromCharCode(65+j)+'. '+opt;b.onclick=()=>{if(i in answers)return;answers[i]=j;div.querySelectorAll('button').forEach((x,k)=>{x.disabled=true;if(k===q[2])x.style.borderColor='#168456';if(k===j&&j!==q[2])x.style.borderColor='#bf6b47'});feed.className='feedback '+(j===q[2]?'correct':'wrong');feed.textContent=(j===q[2]?'Correct. ':'Not quite. ')+q[3];$('score').textContent=`Answered ${Object.keys(answers).length} of ${questions.length} • Correct: ${Object.entries(answers).filter(([k,v])=>v===questions[+k][2]).length}`};div.appendChild(b)});div.appendChild(feed);root.appendChild(div)})}$('resetQuiz').onclick=()=>{answers={};$('score').textContent='Answered 0 of 6 • Correct: 0';buildQuiz()};buildQuiz();
+</script></body></html>
